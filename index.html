@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Comum</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+}
+.hero-pattern {
+    background-color: #e10600;
+    background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+.quote {
+    border-left: 4px solid #e10600;
+}
+.card-hover {
+    transition: all 0.3s ease;
+}
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+.resource-item {
+    transition: all 0.3s ease;
+}
+.resource-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fffefe;
+}
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+    user-select: none; /* Evita seleção de texto */
+}
+.nav-link:focus {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 4px;
+    left: 0;
+    background-color: #FFD700;
+    transition: width 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 215, 0, 0.08);
+    color: #FFD700;
+}
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+.timeline-item {
+    transition: all 0.3s ease;
+}
+.timeline-item:hover {
+    transform: scale(1.03);
+}
+.glossary-item {
+    transition: all 0.2s ease;
+}
+.glossary-item:hover {
+    background-color: #fffefe;
+}
+.article-card {
+    transition: all 0.3s ease;
+}
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+.btn-hover {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.btn-hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.6s ease;
+}
+.btn-hover:hover:before {
+    left: 100%;
+}
+/* Improved mobile menu animation */
+#mobileMenu {
+    transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+}
+#mobileMenu.open {
+    max-height: 500px;
+    opacity: 1;
+}
+.mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    color: #fff;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    user-select: none; /* Evita seleção de texto */
+}
+.mobile-nav-link:focus {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}
+.mobile-nav-link:hover, .mobile-nav-link.active {
+    background: rgba(255, 215, 0, 0.13);
+    color: #FFD700;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="bg-red-700 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <!-- Foice e Martelo (Hammer and Sickle) SVG versão corrigida -->
+            <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shadow border-2 border-yellow-400" style="background-color: #e10600;">
+                <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/56/Hammer_sickle_clean.png" 
+                        alt="Foice e Martelo" 
+                        class="w-6 h-6 object-contain transition-transform duration-200 hover:scale-105" 
+                        loading="lazy"
+                />
+            </div>
+            <span class="font-bold text-xl">Site Comum</span>
+        </div>
+        <!-- Desktop menu -->
+        <div class="hidden md:flex space-x-2">
+            <a href="#inicio" class="nav-link transition">Início</a>
+            <a href="#sobre" class="nav-link transition">Sobre</a>
+            <a href="#teorias" class="nav-link transition">Teorias</a>
+            <a href="#recursos" class="nav-link transition">Recursos</a>
+            <a href="#glossario" class="nav-link transition">Glossário</a>
+            <a href="#artigos" class="nav-link transition">Artigos</a>
+        </div>
+        <!-- Hamburger -->
+        <button class="md:hidden focus:outline-none" id="menuButton" aria-label="Abrir menu">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="md:hidden bg-red-800 px-4" id="mobileMenu" aria-label="Menu de navegação mobile">
+        <a href="#inicio" class="mobile-nav-link">Início</a>
+        <a href="#sobre" class="mobile-nav-link">Sobre</a>
+        <a href="#teorias" class="mobile-nav-link">Teorias</a>
+        <a href="#recursos" class="mobile-nav-link">Recursos</a>
+        <a href="#glossario" class="mobile-nav-link">Glossário</a>
+        <a href="#artigos" class="mobile-nav-link">Artigos</a>
+    </div>
+</nav>
+<script>
+    // Improved mobile menu toggle with animation and outside click
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+        }, 400);
+        menuOpen = false;
+    }
+
+    function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        setTimeout(() => {
+            mobileMenu.classList.add('open');
+        }, 10);
+        menuOpen = true;
+    }
+
+    menuButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (menuOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    // Close mobile menu on click outside or on link
+    document.addEventListener('click', function(e) {
+        if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuButton) {
+            closeMobileMenu();
+        }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            closeMobileMenu();
+            // Update active class immediately on click
+            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Highlight active nav link (desktop and mobile)
+    function highlightNavLinks() {
+        const hash = window.location.hash || "#inicio";
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            if (link.getAttribute('href') === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    window.addEventListener('hashchange', highlightNavLinks);
+    window.addEventListener('DOMContentLoaded', highlightNavLinks);
+</script>
+
+<!-- Hero Section -->
+<section id="inicio" class="hero-pattern text-white py-20">
+  <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+    <div class="md:w-1/2 mb-10 md:mb-0">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Análise Crítica do Capitalismo</h1>
+      <p class="text-xl mb-8">Explorando as teorias de Karl Marx e sua relevância contemporânea</p>
+      <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+        <a href="#teorias" class="btn-hover bg-yellow-500 hover:bg-yellow-600 text-red-900 font-bold py-3 px-6 rounded-lg text-center">Explorar Teorias</a>
+        <a href="#recursos" class="btn-hover bg-white hover:bg-gray-100 text-red-700 font-bold py-3 px-6 rounded-lg text-center transition">Recursos de Estudo</a>
+      </div>
+    </div>
+    <div class="md:w-1/2 flex justify-center">
+    <!-- Foice e Martelo (Hammer and Sickle) - Imagem aprimorada e responsiva -->
+    <div class="w-64 h-64 rounded-full overflow-hidden flex items-center justify-center shadow-lg border-4 border-yellow-400" style="background-color: #e10600;">
+      <img 
+        src="https://upload.wikimedia.org/wikipedia/commons/5/56/Hammer_sickle_clean.png" 
+        alt="Foice e Martelo"
+        class="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="sobre" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Sobre Este Projeto</h2>
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <div class="bg-red-100 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="quote pl-4 py-2 mb-4">
+            <p class="italic text-gray-700">"A história de todas as sociedades até hoje existentes é a história das lutas de classes."</p>
+            <p class="text-right text-gray-600 mt-2">- Karl Marx, Manifesto Comunista</p>
+          </div>
+          <p class="text-gray-700 mb-4">Este projeto acadêmico visa explorar os fundamentos do pensamento marxista e sua aplicação na análise da sociedade contemporânea.</p>
+          <p class="text-gray-700">Como centro de estudos sociais, buscamos compartilhar conhecimentos sobre teoria crítica e práxis revolucionária.</p>
+        </div>
+      </div>
+      <div class="md:w-1/2 md:pl-8">
+        <h3 class="text-2xl font-semibold mb-4 text-red-700">Objetivos do Estudo</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start hover:translate-x-2 transition-transform duration-300">
+            <svg class="w-5 h-5 text-yellow-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-700">Analisar criticamente as estruturas econômicas capitalistas</span>
+          </li>
+          <li class="flex items-start hover:translate-x-2 transition-transform duration-300">
+            <svg class="w-5 h-5 text-yellow-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-700">Compreender os conceitos de mais-valia e exploração do trabalho</span>
+          </li>
+          <li class="flex items-start hover:translate-x-2 transition-transform duration-300">
+            <svg class="w-5 h-5 text-yellow-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-700">Estudar o materialismo histórico e dialético</span>
+          </li>
+          <li class="flex items-start hover:translate-x-2 transition-transform duration-300">
+            <svg class="w-5 h-5 text-yellow-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-700">Investigar a relevância do pensamento marxista no século XXI</span>
+          </li>
+          <li class="flex items-start hover:translate-x-2 transition-transform duration-300">
+            <svg class="w-5 h-5 text-yellow-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-700">Promover discussões sobre alternativas ao modelo econômico atual</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Theories Section -->
+<section id="teorias" class="py-24 bg-[#fff5f5] relative overflow-x-hidden">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            <span class="inline-block bg-gradient-to-r from-[#e10600] via-[#b80000] to-[#e10600] bg-clip-text text-transparent">Principais Teorias</span>
+        </h2>
+        <div class="flex justify-center mb-12">
+            <div class="w-32 h-2 rounded-full bg-gradient-to-r from-[#e10600] via-[#b80000] to-[#e10600] shadow-lg"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C18.832 5.477 9.246 5.477 12 6.253zm0 0V19.5"></path>
+                        </svg>
+                        Materialismo Histórico
+                    </h3>
+                    <p class="text-gray-700 mb-8">Concepção materialista da história que analisa o desenvolvimento das sociedades a partir das condições materiais de produção.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="materialismo">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M15 11a4 4 0 10-8 0 4 4 0 008 0z"></path>
+                        </svg>
+                        Luta de Classes
+                    </h3>
+                    <p class="text-gray-700 mb-8">Análise do conflito social entre classes com interesses econômicos opostos, especialmente entre burguesia e proletariado.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="luta">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"></path>
+                        </svg>
+                        Mais-Valia
+                    </h3>
+                    <p class="text-gray-700 mb-8">Conceito que explica a exploração do trabalho no capitalismo, onde o valor produzido pelo trabalhador excede seu salário.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="maisvalia">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5"></path>
+                        </svg>
+                        Alienação
+                    </h3>
+                    <p class="text-gray-700 mb-8">Processo pelo qual o trabalhador se torna estranho ao produto de seu trabalho, à sua atividade produtiva e à sua essência humana.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="alienacao">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 0h-1V9h-1m-4 0h1v4h1m-4 0h1v4h1"></path>
+                        </svg>
+                        Ideologia
+                    </h3>
+                    <p class="text-gray-700 mb-8">Conjunto de ideias que refletem os interesses da classe dominante e que são apresentadas como universais e naturais.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="ideologia">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-red-200 relative group hover:scale-[1.03] transition-transform duration-300">
+                <div class="absolute top-0 right-0 m-4">
+                    <svg class="w-10 h-10 text-[#e10600] opacity-40 group-hover:opacity-80 transition" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                </div>
+                <div class="bg-[#e10600] h-2"></div>
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4 text-[#e10600] flex items-center gap-2">
+                        <svg class="w-7 h-7 text-[#b80000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 018 0v2m-4-6a4 4 0 100-8 4 4 0 000 8z"></path>
+                        </svg>
+                        Estado e Revolução
+                    </h3>
+                    <p class="text-gray-700 mb-8">Análise do Estado como instrumento de dominação de classe e da necessidade de sua superação através da revolução proletária.</p>
+                    <button class="teoria-btn btn-hover relative overflow-hidden bg-[#e10600] text-white font-bold py-2 px-6 rounded-lg shadow transition group"
+                        data-teoria="estado">
+                        <span class="relative z-10">Saiba mais</span>
+                        <span class="absolute inset-0 bg-[#b80000] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal for theory details -->
+        <div id="teoriaModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0 shadow-2xl border-2 border-[#e10600]" id="modalContent">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 id="modalTitle" class="text-3xl font-extrabold text-[#e10600]"></h3>
+                        <button id="closeModal" class="text-gray-500 hover:text-[#e10600] hover:rotate-90 transition-transform duration-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="modalContentText" class="text-gray-700 text-lg"></div>
+                    <div class="mt-8 text-right">
+                        <button id="closeModalBtn" class="btn-hover bg-[#e10600] hover:bg-[#b80000] text-white font-bold py-2 px-6 rounded-md shadow transition">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Decorative SVGs -->
+    <svg class="absolute left-0 top-0 w-56 h-56 opacity-10 -z-10" viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="100" fill="#e10600"/>
+    </svg>
+    <svg class="absolute right-0 bottom-0 w-56 h-56 opacity-10 -z-10" viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="100" fill="#e10600"/>
+    </svg>
+</section>
+<style>
+    .teoria-btn {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    .teoria-btn span.absolute {
+        z-index: 0;
+        pointer-events: none;
+    }
+    .teoria-btn:hover span.absolute,
+    .teoria-btn:focus span.absolute {
+        opacity: 1 !important;
+    }
+    .teoria-btn span.relative {
+        position: relative;
+        z-index: 10;
+    }
+</style>
+
+<!-- Resources Section -->
+<section id="recursos" class="py-20 bg-gradient-to-br from-red-50 via-[#ffeaea] to-white relative overflow-x-hidden">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-extrabold text-center mb-14 text-gray-800 tracking-tight">
+            <span class="inline-block bg-gradient-to-r from-[#e10600] via-[#b80000] to-[#e10600] bg-clip-text text-transparent">Recursos de Estudo</span>
+        </h2>
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Books -->
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 border border-red-200 hover:shadow-red-300 transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold mb-8 text-red-700 flex items-center gap-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C18.832 5.477 9.246 5.477 12 6.253zm0 0V19.5"></path>
+                        </svg>
+                        Leituras Essenciais
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-[#ffeaea] via-red-100 to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                O Capital
+                            </h4>
+                            <p class="text-gray-600">Karl Marx</p>
+                            <p class="text-sm text-gray-500 mt-1">Análise crítica da economia política e do modo de produção capitalista.</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-[#ffeaea] via-red-100 to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                Manifesto Comunista
+                            </h4>
+                            <p class="text-gray-600">Karl Marx e Friedrich Engels</p>
+                            <p class="text-sm text-gray-500 mt-1">Texto fundador que apresenta os princípios do comunismo.</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-[#ffeaea] via-red-100 to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                O Estado e a Revolução
+                            </h4>
+                            <p class="text-gray-600">Vladimir Lenin</p>
+                            <p class="text-sm text-gray-500 mt-1">Análise do papel do Estado e da necessidade de sua superação.</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-[#ffeaea] via-red-100 to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                Dialética do Concreto
+                            </h4>
+                            <p class="text-gray-600">Karel Kosik</p>
+                            <p class="text-sm text-gray-500 mt-1">Estudo sobre o método dialético e a práxis revolucionária.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Study Materials -->
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 border border-red-200 hover:shadow-red-300 transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold mb-8 text-red-600 flex items-center gap-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        Materiais Complementares
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-red-100 via-[#ffeaea] to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                Artigos Acadêmicos
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1">Seleção de artigos científicos sobre economia política e crítica ao capitalismo.</p>
+                            <button class="text-red-700 hover:text-red-800 text-sm font-medium mt-2 hover:underline btn-hover" id="verArtigos">
+                                <span class="relative z-10">ver lista completa</span>
+                            </button>
+                        </div>
+                        <div class="bg-gradient-to-r from-red-100 via-[#ffeaea] to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                Documentários Recomendados
+                            </h4>
+                            <ul class="text-sm text-gray-600 mt-2 space-y-1 list-disc pl-5">
+                                <li>O capital no século XXI</li>
+                                <li>A História do Socialismo</li>
+                                <li>Marx Reloaded</li>
+                                <li>O Jovem Karl Marx</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-r from-red-100 via-[#ffeaea] to-white p-5 rounded-xl shadow resource-item border border-red-200 hover:scale-[1.03] transition-transform duration-300">
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+                                Glossário de conceitos
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1">Compilação dos principais termos e conceitos da teoria marxista com explicações detalhadas.</p>
+                            <button class="text-red-700 hover:text-red-800 text-sm font-medium mt-2 hover:underline btn-hover" id="verGlossario">
+                                <span class="relative z-10">Acessar glossário</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative SVGs -->
+        <svg class="absolute left-0 bottom-0 w-40 h-40 opacity-10 -z-10" viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="100" r="100" fill="#e10600"/>
+        </svg>
+        <svg class="absolute right-0 top-0 w-40 h-40 opacity-10 -z-10" viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="100" r="100" fill="#e10600"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Glossary section -->
+<section id="glossario" class="py-16 bg-gray-50 hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Glossário de Conceitos</h2>
+      <button id="voltarRecursos" class="btn-hover bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Voltar
+      </button>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <div class="mb-6">
+        <input type="text" id="searchGlossary" placeholder="Buscar conceito..." class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+      </div>
+      <div class="space-y-6" id="glossaryItems">
+        <!-- Glossary items will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Articles Section -->
+<section id="artigos" class="py-16 bg-gray-50 hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Artigos Acadêmicos</h2>
+      <button id="voltarRecursosArtigos" class="btn-hover bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Voltar
+      </button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="articleContainer">
+      <!-- Articles will be dynamically loaded here -->
+    </div>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="py-16 bg-gradient-to-b from-red-50 to-gray-50 relative overflow-x-hidden">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Linha do Tempo do Pensamento Marxista</h2>
+        <div class="relative">
+            <!-- Timeline line -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-2 bg-gradient-to-b from-yellow-400 via-red-600 to-yellow-400 rounded-full shadow-lg"></div>
+            <!-- Timeline items -->
+            <div class="relative z-10">
+                <!-- Timeline Data -->
+                <div id="timelineItems">
+                    <!-- Timeline items will be injected here -->
+                </div>
+            </div>
+        </div>
+        <!-- Timeline Modal -->
+        <div id="timelineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg max-w-lg w-full mx-4 p-6 shadow-lg relative animate-fade-in">
+                <button id="closeTimelineModal" class="absolute top-3 right-3 text-gray-400 hover:text-red-700 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <h3 id="timelineModalTitle" class="text-2xl font-bold text-red-700 mb-2"></h3>
+                <h4 id="timelineModalSubtitle" class="text-lg font-semibold text-gray-800 mb-4"></h4>
+                <div id="timelineModalContent" class="text-gray-700"></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes fade-in {
+            from { opacity: 0; transform: scale(0.95);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        .animate-fade-in { animation: fade-in 0.3s;}
+        .timeline-dot {
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
+            box-shadow: 0 0 0 0 #e10600;
+        }
+        .timeline-dot:hover, .timeline-dot.active {
+            box-shadow: 0 0 0 6px #fde68a, 0 0 0 12px #e1060033;
+            transform: scale(1.15);
+            z-index: 20;
+        }
+        .timeline-card {
+            background: linear-gradient(90deg, #fff 80%, #ffe4e6 100%);
+            border-radius: 1rem;
+            box-shadow: 0 6px 24px 0 rgba(0,0,0,0.07);
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
+            border: 1px solid #fca5a5;
+        }
+        .timeline-card:hover {
+            box-shadow: 0 12px 32px 0 rgba(225, 6, 0, 0.12);
+            transform: translateY(-4px) scale(1.03);
+            border-color: #e10600;
+        }
+    </style>
+    <script>
+        // Timeline data
+        const timelineData = [
+            {
+                year: "1848",
+                title: "Manifesto Comunista",
+                desc: "Marx e Engels publicam o Manifesto do Partido Comunista, estabelecendo as bases teóricas do socialismo científico.",
+                details: `<ul class="list-disc pl-5 mb-2">
+                    <li>Primeira exposição sistemática do materialismo histórico.</li>
+                    <li>Defesa da luta de classes como motor da história.</li>
+                    <li>Chamada à união dos trabalhadores do mundo.</li>
+                </ul>
+                <p>O Manifesto influenciou movimentos revolucionários em todo o mundo e permanece um dos textos políticos mais lidos da história.</p>`
+            },
+            {
+                year: "1867",
+                title: "O Capital (Volume 1)",
+                desc: "Publicação do primeiro volume de 'O Capital', obra-prima de Marx sobre a crítica da economia política.",
+                details: `<ul class="list-disc pl-5 mb-2">
+                    <li>Análise do funcionamento do capitalismo e da exploração do trabalho.</li>
+                    <li>Introdução dos conceitos de mais-valia, fetichismo da mercadoria e acumulação primitiva.</li>
+                </ul>
+                <p>O Capital é referência fundamental para a economia política crítica e para os estudos marxistas até hoje.</p>`
+            },
+            {
+                year: "1917",
+                title: "Revolução Russa",
+                desc: "Primeira revolução socialista bem-sucedida, liderada pelos bolcheviques sob a direção de Lenin.",
+                details: `<ul class="list-disc pl-5 mb-2">
+                    <li>Queda do regime czarista e instauração do governo dos sovietes.</li>
+                    <li>Aplicação prática das ideias marxistas em larga escala.</li>
+                    <li>Inspiração para movimentos revolucionários em todo o século XX.</li>
+                </ul>
+                <p>A Revolução Russa marcou o início de uma nova era na política mundial.</p>`
+            },
+            {
+                year: "1923-1950",
+                title: "Escola de Frankfurt",
+                desc: "Desenvolvimento da Teoria Crítica, aplicando o marxismo à análise da cultura e da sociedade contemporânea.",
+                details: `<ul class="list-disc pl-5 mb-2">
+                    <li>Autores como Adorno, Horkheimer, Marcuse e Benjamin.</li>
+                    <li>Crítica à cultura de massa, à razão instrumental e ao autoritarismo.</li>
+                </ul>
+                <p>A Escola de Frankfurt ampliou o alcance do marxismo para além da economia e da política.</p>`
+            },
+            {
+                year: "1960-1970",
+                title: "Marxismo Ocidental",
+                desc: "Desenvolvimento de novas interpretações do marxismo, com foco em questões culturais, filosóficas e estéticas.",
+                details: `<ul class="list-disc pl-5 mb-2">
+                    <li>Enfoque em temas como ideologia, hegemonia, subjetividade e cultura.</li>
+                    <li>Autores: Gramsci, Althusser, Lukács, Sartre, entre outros.</li>
+                </ul>
+                <p>O marxismo ocidental influenciou debates acadêmicos e movimentos sociais em todo o mundo.</p>`
+            }
+        ];
+
+        // Render timeline items
+        const timelineItems = document.getElementById('timelineItems');
+        timelineData.forEach((item, idx) => {
+            // Odd/even for left/right
+            const isLeft = idx % 2 === 0;
+            const align = isLeft ? "md:flex-row" : "md:flex-row-reverse";
+            const textAlign = isLeft ? "md:text-right md:pr-8" : "md:text-left md:pl-8";
+            const dotPos = isLeft ? "md:right-[-1.5rem] md:left-auto left-1/2" : "md:left-[-1.5rem] md:right-auto left-1/2";
+            const cardPos = isLeft ? "md:justify-end" : "md:justify-start";
+            timelineItems.innerHTML += `
+                <div class="flex flex-col ${align} items-center mb-16 timeline-item relative">
+                    <div class="md:w-1/2 w-full flex ${cardPos}">
+                        <div class="timeline-card p-6 mb-4 md:mb-0 w-full max-w-md ${textAlign}" data-timeline-idx="${idx}">
+                            <h3 class="text-xl font-bold text-yellow-600 mb-1">${item.year}</h3>
+                            <h4 class="text-lg font-semibold text-red-700 mb-2">${item.title}</h4>
+                            <p class="text-gray-700">${item.desc}</p>
+                            <button class="mt-4 btn-hover bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition timeline-more-btn" data-timeline-idx="${idx}">Saiba mais</button>
+                        </div>
+                    </div>
+                    <div class="timeline-dot bg-gradient-to-br from-yellow-400 via-red-600 to-yellow-400 rounded-full w-8 h-8 border-4 border-white shadow absolute md:static ${dotPos}" data-timeline-idx="${idx}" tabindex="0" aria-label="Ver detalhes de ${item.title}"></div>
+                    <div class="md:w-1/2"></div>
+                </div>
+            `;
+        });
+
+        // Modal logic
+        const timelineModal = document.getElementById('timelineModal');
+        const closeTimelineModal = document.getElementById('closeTimelineModal');
+        const timelineModalTitle = document.getElementById('timelineModalTitle');
+        const timelineModalSubtitle = document.getElementById('timelineModalSubtitle');
+        const timelineModalContent = document.getElementById('timelineModalContent');
+
+        function openTimelineModal(idx) {
+            const item = timelineData[idx];
+            timelineModalTitle.textContent = item.year;
+            timelineModalSubtitle.textContent = item.title;
+            timelineModalContent.innerHTML = item.details;
+            timelineModal.classList.remove('hidden');
+            // Highlight dot
+            document.querySelectorAll('.timeline-dot').forEach(dot => dot.classList.remove('active'));
+            document.querySelector(`.timeline-dot[data-timeline-idx="${idx}"]`).classList.add('active');
+        }
+        function closeTimeline() {
+            timelineModal.classList.add('hidden');
+            document.querySelectorAll('.timeline-dot').forEach(dot => dot.classList.remove('active'));
+        }
+        // Click on dot or card
+        document.querySelectorAll('.timeline-dot, .timeline-more-btn, .timeline-card').forEach(el => {
+            el.addEventListener('click', function(e) {
+                const idx = this.getAttribute('data-timeline-idx');
+                if (idx !== null) openTimelineModal(idx);
+            });
+            el.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const idx = this.getAttribute('data-timeline-idx');
+                    if (idx !== null) openTimelineModal(idx);
+                }
+            });
+        });
+        closeTimelineModal.addEventListener('click', closeTimeline);
+        timelineModal.addEventListener('click', function(e) {
+            if (e.target === timelineModal) closeTimeline();
+        });
+        window.addEventListener('keydown', function(e) {
+            if (!timelineModal.classList.contains('hidden') && e.key === 'Escape') closeTimeline();
+        });
+    </script>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12 mt-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between gap-10">
+            <!-- Logo & Description -->
+            <div class="mb-8 md:mb-0 flex-1 min-w-[220px]">
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shadow border-2 border-yellow-400" style="background-color: #e10600;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Hammer_sickle_clean.png" 
+                                 alt="Foice e Martelo" 
+                                 class="w-6 h-6 object-contain transition-transform duration-200 hover:scale-105" 
+                                 loading="lazy" />
+                    </div>
+                    <span class="font-bold text-xl">Site Comum</span>
+                </div>
+                <p class="text-gray-400 max-w-xs">Projeto acadêmico dedicado ao estudo e divulgação do pensamento marxista e sua relevância contemporânea.</p>
+                <div class="flex space-x-4 mt-6">
+                    <a href="mailto:contato@sitecomum.com" class="text-gray-400 hover:text-yellow-400 transition" aria-label="E-mail">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12l-4-4-4 4m8 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v4"></path>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/" target="_blank" rel="noopener" class="text-gray-400 hover:text-yellow-400 transition" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .267.18.577.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <div class="grid grid-cols-2 gap-10 flex-1 min-w-[220px]">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-yellow-500">Navegação</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Início</a></li>
+                        <li><a href="#sobre" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Sobre</a></li>
+                        <li><a href="#teorias" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Teorias</a></li>
+                        <li><a href="#recursos" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Recursos</a></li>
+                        <li><a href="#glossario" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Glossário</a></li>
+                        <li><a href="#artigos" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Artigos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-yellow-500">Recursos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#recursos" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Biblioteca</a></li>
+                        <li><a href="#artigos" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Artigos</a></li>
+                        <li><a href="#glossario" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Glossário</a></li>
+                        <li><a href="#recursos" class="text-gray-400 hover:text-yellow-400 transition hover:translate-x-1 inline-block">Bibliografia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Newsletter -->
+            <div class="flex-1 min-w-[220px]">
+                <h4 class="text-lg font-semibold mb-4 text-yellow-500">Receba novidades</h4>
+                <form class="flex flex-col sm:flex-row items-center gap-3" autocomplete="off" onsubmit="event.preventDefault();alert('Inscrição realizada!');">
+                    <input type="email" required placeholder="Seu e-mail" class="w-full px-4 py-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+                    <button type="submit" class="btn-hover bg-yellow-500 hover:bg-yellow-600 text-red-900 font-bold px-6 py-2 rounded-md transition">Inscrever</button>
+                </form>
+                <p class="text-xs text-gray-500 mt-2">Sem spam. Apenas conteúdos relevantes.</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-10 pt-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2023–2024 Site Comum. Projeto acadêmico sem fins lucrativos.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+  // Theory modal functionality
+  const teoriaModal = document.getElementById('teoriaModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalContentText = document.getElementById('modalContentText');
+  const modalContentDiv = document.getElementById('modalContent');
+  const closeModal = document.getElementById('closeModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  // Theory content
+  const teorias = {
+    materialismo: {
+      title: "Materialismo Histórico",
+      content: `
+        <p class="mb-4">O materialismo histórico é uma teoria desenvolvida por Karl Marx e Friedrich Engels que busca explicar o desenvolvimento das sociedades humanas.</p>
+        <p class="mb-4">Segundo essa concepção, as formas de produção material (como as pessoas produzem seus meios de subsistência) determinam a organização social, política e cultural.</p>
+        <p class="mb-4">Principais conceitos:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li>Forças produtivas: conjunto dos meios de produção e da força de trabalho</li>
+          <li>Relações de produção: relações sociais estabelecidas no processo produtivo</li>
+          <li>Modos de produção: combinação específica de forças produtivas e relações de produção</li>
+          <li>Infraestrutura e superestrutura: base econômica e instituições políticas, jurídicas e culturais</li>
+        </ul>
+        <p>O materialismo histórico propõe que as contradições entre as forças produtivas e as relações de produção são o motor da história.</p>
+      `
+    },
+    luta: {
+      title: "Luta de Classes",
+      content: `
+        <p class="mb-4">A luta de classes é um conceito central no pensamento marxista, que afirma que a história de todas as sociedades até hoje é a história das lutas de classes.</p>
+        <p class="mb-4">No capitalismo, essa luta se manifesta principalmente entre:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li>Burguesia: classe que detém os meios de produção</li>
+          <li>Proletariado: classe que vende sua força de trabalho para sobreviver</li>
+        </ul>
+        <p class="mb-4">Essa contradição fundamental entre capital e trabalho gera conflitos sociais, políticos e econômicos que, segundo Marx, levariam à superação do capitalismo.</p>
+        <p class="mb-4">A consciência de classe é um elemento importante nesse processo, pois representa o momento em que os trabalhadores reconhecem seus interesses comuns como classe.</p>
+        <p>Marx argumentava que a luta de classes culminaria na revolução proletária e na instauração de uma sociedade sem classes.</p>
+      `
+    },
+    maisvalia: {
+      title: "Mais-Valia",
+      content: `
+        <p class="mb-4">A mais-valia é um conceito econômico desenvolvido por Marx para explicar o mecanismo de exploração no sistema capitalista.</p>
+        <p class="mb-4">Refere-se à diferença entre o valor produzido pelo trabalho e o salário pago ao trabalhador, sendo apropriada pelo capitalista como lucro.</p>
+        <p class="mb-4">Marx distingue dois tipos principais de mais-valia:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li><strong>Mais-valia absoluta:</strong> obtida pelo prolongamento da jornada de trabalho</li>
+          <li><strong>Mais-valia relativa:</strong> obtida pelo aumento da produtividade, que reduz o tempo de trabalho necessário</li>
+        </ul>
+        <p class="mb-4">A extração da mais-valia é possível porque, no capitalismo, a força de trabalho se torna uma mercadoria que o trabalhador vende para sobreviver.</p>
+        <p>Contudo, durante a jornada de trabalho, o trabalhador produz mais valor do que recebe como salário, e esse excedente é apropriado pelo capitalista.</p>
+      `
+    },
+    alienacao: {
+      title: "Alienação",
+      content: `
+        <p class="mb-4">A alienação (ou estranhamento) é um conceito desenvolvido por Marx, especialmente em seus escritos de juventude.</p>
+        <p class="mb-4">Marx identifica quatro aspectos principais da alienação:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li><strong>Alienação do produto do trabalho:</strong> o trabalhador não possui o que produz</li>
+          <li><strong>Alienação da atividade produtiva:</strong> o trabalho se torna uma atividade externa, forçada e não satisfatória</li>
+          <li><strong>Alienação da natureza humana:</strong> o trabalho alienado afasta o ser humano de sua essência como ser criativo</li>
+          <li><strong>Alienação em relação aos outros seres humanos:</strong> as relações sociais são mediadas por relações mercantis</li>
+        </ul>
+        <p class="mb-4">A alienação resulta da divisão social do trabalho e da propriedade privada dos meios de produção, que separam os trabalhadores dos frutos de seu trabalho.</p>
+        <p>Para Marx, a superação da alienação só seria possível com a abolição da propriedade privada e a reorganização da produção sob controle dos trabalhadores.</p>
+      `
+    },
+    ideologia: {
+      title: "Ideologia",
+      content: `
+        <p class="mb-4">Na teoria marxista, a ideologia é compreendida como um conjunto de ideias, valores e representações que expressam os interesses da classe dominante.</p>
+        <p class="mb-4">Marx e Engels, em "A Ideologia Alemã", argumentam que "as ideias da classe dominante são, em cada época, as ideias dominantes".</p>
+        <p class="mb-4">A ideologia funciona como:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li>Um mecanismo de legitimação das relações sociais existentes</li>
+          <li>Uma forma de ocultar as contradições e a exploração presentes na sociedade</li>
+          <li>Um instrumento para naturalizar o que é histórico e socialmente construído</li>
+        </ul>
+        <p class="mb-4">Exemplos de ideologias no capitalismo incluem o individualismo, a meritocracia e a ideia de que o mercado é neutro.</p>
+        <p>A crítica da ideologia é uma parte importante do método marxista, buscando revelar os interesses de classe por trás das ideias dominantes.</p>
+      `
+    },
+    estado: {
+      title: "Estado e Revolução",
+      content: `
+        <p class="mb-4">A teoria marxista do Estado o compreende não como um árbitro neutro acima dos conflitos sociais, mas como um instrumento de dominação de classe.</p>
+        <p class="mb-4">Marx afirma que "o poder executivo do Estado moderno não é senão um comitê para gerir os negócios comuns de toda a classe burguesa".</p>
+        <p class="mb-4">Características do Estado na visão marxista:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-2">
+          <li>Surge da necessidade de conter os antagonismos de classe</li>
+          <li>Representa os interesses da classe economicamente dominante</li>
+          <li>Mantém a ordem social através do monopólio legítimo da violência</li>
+          <li>Cria a aparência de universalidade e neutralidade</li>
+        </ul>
+        <p class="mb-4">Lenin, em "O Estado e a Revolução", desenvolve a teoria marxista argumentando que o proletariado não pode simplesmente tomar o Estado burguês, mas deve destruí-lo e construir um novo tipo de Estado operário.</p>
+        <p>O objetivo final seria o definhamento do Estado, quando as classes sociais desapareceriam e não haveria mais necessidade de um aparelho de coerção.</p>
+      `
+    }
+  };
+
+  // Glossary data
+  const glossaryData = [
+    {
+      term: "Burguesia",
+      definition: "Classe social que detém os meios de produção (fábricas, terras, máquinas, capital) e compra a força de trabalho dos proletários."
+    },
+    {
+      term: "Proletariado",
+      definition: "Classe social que não possui meios de produção e precisa vender sua força de trabalho para sobreviver. Segundo Marx, é a classe revolucionária no capitalismo."
+    },
+    {
+      term: "Mais-valia",
+      definition: "Diferença entre o valor produzido pelo trabalho e o salário pago ao trabalhador. É a fonte do lucro capitalista e representa a exploração do trabalho."
+    },
+    {
+      term: "Alienação",
+      definition: "Processo pelo qual o trabalhador se torna estranho ao produto de seu trabalho, à sua atividade produtiva, à sua natureza humana e aos outros seres humanos."
+    },
+    {
+      term: "Materialismo histórico",
+      definition: "Concepção teórica que explica o desenvolvimento das sociedades a partir das condições materiais de existência e das contradições entre forças produtivas e relações de produção."
+    },
+    {
+      term: "Materialismo dialético",
+      definition: "Método filosófico desenvolvido por Marx e Engels que compreende a realidade como um processo dinâmico, marcado por contradições e transformações qualitativas."
+    },
+    {
+      term: "Infraestrutura",
+      definition: "Base econômica da sociedade, composta pelas forças produtivas e relações de produção. Segundo Marx, determina em grande medida a superestrutura."
+    },
+    {
+      term: "Superestrutura",
+      definition: "Conjunto de instituições políticas, jurídicas, religiosas e culturais que se erguem sobre a base econômica e tendem a legitimar a ordem social existente."
+    },
+    {
+      term: "Ideologia",
+      definition: "Conjunto de ideias e representações que expressam os interesses da classe dominante, apresentados como universais e naturais para toda a sociedade."
+    },
+    {
+      term: "Modo de produção",
+      definition: "Forma específica de organização econômica e social, caracterizada por determinadas forças produtivas e relações de produção (ex: feudalismo, capitalismo)."
+    },
+    {
+      term: "Consciência de classe",
+      definition: "Compreensão que uma classe social desenvolve sobre sua posição na sociedade e seus interesses históricos. Para Marx, é fundamental para a ação revolucionária."
+    },
+    {
+      term: "Práxis",
+      definition: "Unidade dialética entre teoria e prática, entre a compreensão crítica da realidade e a ação transformadora. No marxismo, a teoria deve guiar a prática revolucionária."
+    },
+    {
+      term: "Fetichismo da mercadoria",
+      definition: "Fenômeno pelo qual as relações sociais entre pessoas aparecem como relações entre coisas. As mercadorias ganham vida própria, ocultando as relações de exploração."
+    },
+    {
+      term: "Acumulação primitiva",
+      definition: "Processo histórico de separação entre produtores e meios de produção, que criou as condições para o surgimento do capitalismo, muitas vezes através de violência e expropriação."
+    },
+    {
+      term: "Ditadura do proletariado",
+      definition: "Fase transitória após a revolução socialista, na qual o proletariado toma o poder político para transformar as relações de produção e eliminar as classes sociais."
+    }
+  ];
+
+  // Articles data
+  const articlesData = [
+    {
+      title: "A Atualidade da Crítica Marxista à Economia Política",
+      author: "Maria Silva",
+      date: "2023",
+      abstract: "Este artigo analisa a relevância contemporânea da crítica marxista à economia política neoclássica, especialmente no contexto das crises cíclicas do capitalismo.",
+      tags: ["Economia Política", "Crítica", "Contemporaneidade"]
+    },
+    {
+      title: "Alienação e Tecnologia: Uma Análise Marxista da Era Digital",
+      author: "João Pereira",
+      date: "2022",
+      abstract: "Uma investigação sobre como os conceitos marxistas de alienação podem ser aplicados para compreender as relações de trabalho na era das plataformas digitais.",
+      tags: ["Alienação", "Tecnologia", "Trabalho Digital"]
+    },
+    {
+      title: "Imperialismo e Dependência: Contribuições do Marxismo Latino-Americano",
+      author: "Ana Rodrigues",
+      date: "2021",
+      abstract: "O artigo examina as contribuições teóricas do marxismo latino-americano para a compreensão das relações de dependência econômica e cultural na região.",
+      tags: ["Imperialismo", "Dependência", "América Latina"]
+    },
+    {
+      title: "A Questão Ambiental na Perspectiva do Materialismo Histórico",
+      author: "Carlos Mendes",
+      date: "2023",
+      abstract: "Uma análise da crise ambiental contemporânea a partir da perspectiva do materialismo histórico, explorando o conceito de metabolismo sociedade-natureza em Marx.",
+      tags: ["Ecologia", "Materialismo", "Crise Ambiental"]
+    },
+    {
+      title: "Feminismo e Marxismo: Diálogos e Tensões",
+      author: "Luisa Fernandes",
+      date: "2022",
+      abstract: "Este estudo examina as interseções e tensões entre a teoria marxista e as diversas correntes do feminismo, com foco no debate sobre trabalho reprodutivo.",
+      tags: ["Feminismo", "Gênero", "Trabalho Reprodutivo"]
+    },
+    {
+      title: "O Conceito de Hegemonia em Gramsci e sua Relevância Contemporânea",
+      author: "Roberto Almeida",
+      date: "2021",
+      abstract: "Uma investigação sobre o conceito gramsciano de hegemonia e sua aplicabilidade para a análise das formas contemporâneas de dominação política e cultural.",
+      tags: ["Gramsci", "Hegemonia", "Ideologia"]
+    },
+    {
+      title: "Marxismo e Questão Racial: Contribuições para o Debate",
+      author: "Juliana Santos",
+      date: "2023",
+      abstract: "O artigo discute as contribuições do marxismo para a compreensão da questão racial, analisando as relações entre racismo e exploração de classe.",
+      tags: ["Raça", "Racismo", "Interseccionalidade"]
+    },
+    {
+      title: "A Lei do Valor e a Automação: Desafios para a Teoria Marxista",
+      author: "Paulo Oliveira",
+      date: "2022",
+      abstract: "Uma análise dos desafios que a automação e a inteligência artificial apresentam para a teoria do valor-trabalho e para a organização do trabalho no capitalismo contemporâneo.",
+      tags: ["Automação", "Valor", "Trabalho"]
+    },
+    {
+      title: "Estado e Capital na Era Neoliberal: Uma Análise Marxista",
+      author: "Mariana Costa",
+      date: "2021",
+      abstract: "Este estudo examina as transformações do Estado capitalista na era neoliberal, analisando as novas formas de intervenção estatal em favor do capital.",
+      tags: ["Estado", "Neoliberalismo", "Capital"]
+    }
+  ];
+
+  // Open modal when clicking on theory buttons
+  document.querySelectorAll('.teoria-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const teoria = this.getAttribute('data-teoria');
+      modalTitle.textContent = teorias[teoria].title;
+      modalContentText.innerHTML = teorias[teoria].content;
+      teoriaModal.classList.remove("hidden");
+      setTimeout(() => {
+        modalContentDiv.classList.remove('scale-95', 'opacity-0');
+        modalContentDiv.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    });
+  });
+
+  // Close modal
+  closeModal.addEventListener('click', closeModalFunction);
+  closeModalBtn.addEventListener('click', closeModalFunction);
+
+  function closeModalFunction() {
+    modalContentDiv.classList.remove('scale-100', 'opacity-100');
+    modalContentDiv.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      teoriaModal.classList.add('hidden');
+    }, 300);
+  }
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function(event) {
+    if (event.target === teoriaModal) {
+      closeModalFunction();
+    }
+  });
+
+  // Glossary functionality
+  document.getElementById("verGlossario").addEventListener('click', function() {
+    showGlossary();
+  });
+
+  document.querySelectorAll('.glossarioLink').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      showGlossary();
+    });
+  });
+
+  document.getElementById('voltarRecursos').addEventListener('click', function() {
+    document.getElementById('glossario').classList.add("hidden");
+    document.getElementById('recursos').classList.remove('hidden');
+    document.getElementById('artigos').classList.add('hidden');
+  });
+
+  function showGlossary() {
+    document.getElementById('recursos').classList.add('hidden');
+    document.getElementById('artigos').classList.add("hidden");
+    document.getElementById('glossario').classList.remove("hidden");
+    
+    const glossaryContainer = document.getElementById('glossaryItems');
+    glossaryContainer.innerHTML = '';
+    
+    glossaryData.forEach(item => {
+      const glossaryItem = document.createElement('div');
+      glossaryItem.className = 'border-b border-gray-200 pb-4 glossary-item';
+      glossaryItem.innerHTML = `
+        <h3 class="text-xl font-bold text-red-700 mb-2">${item.term}</h3>
+        <p class="text-gray-700">${item.definition}</p>
+      `;
+      glossaryContainer.appendChild(glossaryItem);
+    });
+
+    // Scroll to glossary section
+    document.getElementById('glossario').scrollIntoView({behavior: 'smooth'});
+  }
+
+  // Search glossary functionality
+  document.getElementById("searchGlossary").addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const glossaryItems = document.getElementById('glossaryItems').children;
+    
+    Array.from(glossaryItems).forEach(item => {
+      const term = item.querySelector('h3').textContent.toLowerCase();
+      const definition = item.querySelector('p').textContent.toLowerCase();
+      
+      if (term.includes(searchTerm) || definition.includes(searchTerm)) {
+        item.classList.remove("hidden");
+      } else {
+        item.classList.add("hidden");
+      }
+    });
+  });
+
+  // Articles functionality
+  document.getElementById('verArtigos').addEventListener('click', function() {
+    showArticles();
+  });
+
+  document.querySelectorAll('.artigosLink').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      showArticles();
+    });
+  });
+
+  document.getElementById("voltarRecursosArtigos").addEventListener('click', function() {
+    document.getElementById('artigos').classList.add("hidden");
+    document.getElementById('recursos').classList.remove('hidden');
+  });
+
+  function showArticles() {
+    document.getElementById('recursos').classList.add('hidden');
+    document.getElementById('glossario').classList.add("hidden");
+    document.getElementById('artigos').classList.remove('hidden');
+    
+    const articleContainer = document.getElementById('articleContainer');
+    articleContainer.innerHTML = '';
+    
+    articlesData.forEach(article => {
+      const articleCard = document.createElement('div');
+      articleCard.className = 'bg-white rounded-lg shadow-lg overflow-hidden article-card';
+      
+      const tagsHTML = article.tags.map(tag => 
+        `<span class="inline-block bg-red-100 text-red-700 px-2 py-1 text-xs rounded-full mr-1">${tag}</span>`
+      ).join("");
+      
+      articleCard.innerHTML = `
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 text-red-700">${article.title}</h3>
+          <p class="text-sm text-gray-500 mb-3">Por ${article.author} (${article.date})</p>
+          <p class="text-gray-700 mb-4">${article.abstract}</p>
+          <div class="flex flex-wrap mt-2">
+            ${tagsHTML}
+          </div>
+          <button class="mt-4 text-red-600 hover:text-red-800 font-medium flex items-center hover:underline">
+            Ler artigo completo
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </button>
+        </div>
+      `;
+      articleContainer.appendChild(articleCard);
+    });
+  }
+</script>
+</body>
+</html>
